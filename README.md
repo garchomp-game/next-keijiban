@@ -2,16 +2,27 @@
 
 リアルタイム掲示板のサンプル実装。バックエンドは Flask + Flask-SocketIO、フロントエンドは Next.js。永続化は PostgreSQL、Pub/Sub として Redis を使用。
 
+Node 22 LTS を使用するため、`.nvmrc` を用意しています。
+
 ## Quick Start
 1. **Infra**: `docker compose up -d`  # Postgres/Redis 起動
-2. **Backend env**: `cp backend/.env.example backend/.env` を編集
-3. **Frontend env**: `cp frontend/.env.local.example frontend/.env.local` を編集
-4. **Install deps**:
+2. **Env files**
+   - Backend: `cp backend/.env.example backend/.env`
+   - Frontend: `cp frontend/.env.local.example frontend/.env.local`
+3. **Install deps**
    - Backend: `python -m venv .venv && source .venv/bin/activate && pip install -r backend/requirements.txt`
-   - Frontend: `npm --prefix frontend i`
-5. **Run dev**:
-   - API/WS: `flask --app backend/app.py run --host 0.0.0.0 --port 5000`
-   - Web: `npm --prefix frontend run dev` (http://localhost:3000)
+   - Frontend: `npm --prefix frontend install`
+4. **Run dev**
+   - API/WS: `npm run dev:api` (http://localhost:5000)
+   - Web: `npm run dev:web` (http://localhost:3000)
+
+`CORS_ORIGIN` と `NEXT_PUBLIC_API_BASE_URL` でポート/オリジンを調整できます。
+
+> Docker が利用できない場合は PostgreSQL 16 と Redis 7 を個別に起動してください。compose の healthcheck を参考にできます。
+
+### Troubleshooting
+- psycopg のビルドに失敗する場合は `psycopg[binary]` を利用するか、ビルドツールを確認してください。
+- WebSocket は `eventlet` を利用しており、インストールされている必要があります。
 
 ## Docs
 - Overview: `docs/00-overview.md`

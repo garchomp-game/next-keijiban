@@ -1,0 +1,9 @@
+Flask
+Flask-SocketIO
+Flask-Cors
+Flask-JWT-Extended
+SQLAlchemy
+Alembic
+psycopg[binary]
+redis
+eventlet
