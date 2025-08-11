@@ -1,0 +1,27 @@
+# Artillery (WS) — smoke for Socket.IO (engine: ws with socket.io)
+config:
+  target: "http://localhost:5000"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+  engines:
+    socketio: {}
+  processor: |
+    function joinRoom(userContext, events, done) {
+      userContext.vars.roomId = 'room_smoke';
+      return done();
+    }
+scenarios:
+  - engine: socketio
+    flow:
+      - function: "joinRoom"
+      - emit:
+          channel: "room:join"
+          data: { roomId: "{{ roomId }}" }
+      - think: 1
+      - emit:
+          channel: "message:create"
+          data: { roomId: "{{ roomId }}", body: "hello" }
+      - on:
+          channel: "message:new"
+          handler: "log"
