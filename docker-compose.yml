@@ -26,5 +26,15 @@ services:
       timeout: 3s
       retries: 10
 
+  api:
+    image: alpine:3
+    command: ["sh", "-c", "echo api service; sleep infinity"]
+    profiles: ["api"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
 volumes:
   pgdata: {}
