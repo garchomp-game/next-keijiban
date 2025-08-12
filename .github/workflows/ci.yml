@@ -31,13 +31,28 @@ jobs:
       - run: docker compose up -d
       - name: Wait for services (frontend and backend)
         run: |
-          for i in {1..60}; do
-            if curl -fsS http://localhost:3000 >/dev/null 2>&1 && curl -fsS http://localhost:5000 >/dev/null 2>&1; then
-              echo "Services are up"; exit 0;
+          echo "Waiting for services to start..."
+          for i in {1..90}; do
+            # Check backend health endpoint
+            if curl -fsS http://localhost:5000/healthz >/dev/null 2>&1; then
+              echo "Backend is up"
+              # Check frontend (any response from Next.js)
+              if curl -fsS http://localhost:3000 >/dev/null 2>&1; then
+                echo "Frontend is up"
+                echo "All services are ready!"
+                exit 0
+              fi
             fi
-            echo "Waiting for services... ($i/60)"; sleep 2;
+            echo "Waiting for services... ($i/90) - Backend: $(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/healthz 2>/dev/null || echo "down"), Frontend: $(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000 2>/dev/null || echo "down")"
+            sleep 3
           done
-          echo "Services did not become ready in time"; exit 1
+          echo "Services did not become ready in time"
+          echo "Final status check:"
+          echo "Backend logs:"
+          docker compose logs backend
+          echo "Frontend logs:"
+          docker compose logs frontend
+          exit 1
       - run: npm run lint
       - run: npm run typecheck
       - run: pytest
