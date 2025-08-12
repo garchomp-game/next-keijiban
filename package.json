@@ -6,6 +6,7 @@
     "dev:api": "flask --app backend/app.py run --host 0.0.0.0 --port 5000",
     "dev:web": "npm --prefix frontend run dev",
     "e2e": "npm --prefix tests run e2e",
+    "smoke": "npm --prefix tests run smoke",
     "lint": "npm -ws run lint",
     "typecheck": "npm -ws run typecheck",
     "generate:api": "openapi-typescript docs/20-api/openapi.yaml --output frontend/lib/api-client.ts"

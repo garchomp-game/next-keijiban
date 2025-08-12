@@ -1,0 +1,16 @@
+{
+  "name": "tests",
+  "private": true,
+  "scripts": {
+    "e2e": "playwright test",
+    "smoke": "artillery run ws-smoke.yml",
+    "lint": "echo 'no lint'",
+    "typecheck": "echo 'no typecheck'"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "artillery": "^2.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
+  }
+}

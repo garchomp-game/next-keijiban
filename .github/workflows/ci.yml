@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: cp backend/.env.example backend/.env
+      - run: cp frontend/.env.local.example frontend/.env.local
+      - run: npm ci
+      - run: npm --prefix tests ci
+      - run: npx --prefix tests playwright install --with-deps
+      - run: pip install -r backend/requirements.txt
+      - run: docker compose up -d
+      - run: sleep 15
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: pytest
+      - run: npm run e2e
+      - run: npm run smoke
