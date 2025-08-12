@@ -2,16 +2,16 @@
 
 ## T1: Sprint 0（土台整備）
 目的:
-  Postgres/Redis の docker-compose、.env.example、README、共通 npm scripts を追加し、以降のタスクの実行性を担保する。
+  Postgres/Redis のローカル実行環境、.env.example、README、共通 npm scripts を整備し、以降のタスクの実行性を担保する。
 
 やること:
-  - `docker-compose.yml` に postgres:16-alpine / redis:7-alpine を定義（healthcheck含む）
+  - README に PostgreSQL 16 / Redis 7 を起動する手順を記載
   - `backend/.env.example` と `frontend/.env.local.example` を作成
   - ルート `README.md` を更新（Quick Start/Ports/CORS）
   - ルート package.json がある場合は scripts を追加（無ければスキップ）
 
 受け入れ条件:
-  - `docker compose up -d` が成功し、両コンテナが healthy
+  - PostgreSQL と Redis がローカルで起動し、接続確認できる
   - .env.example に必要キーが網羅（DB/JWT/WS/CORS）
   - README の手順でローカル起動がイメージ可能
 

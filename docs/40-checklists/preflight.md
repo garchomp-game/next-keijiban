@@ -6,7 +6,7 @@
 - [ ] ドメイン/ルーム命名規約
 
 ## 準備
-- [ ] docker-compose（pg/redis）
+- [ ] PostgreSQL/Redis（ローカル起動）
 - [ ] .env.example（backend/frontend）
 - [ ] OpenAPI & WS 定義の最終化
 

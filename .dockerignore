@@ -1,8 +1,0 @@
-**/__pycache__/
-**/.pytest_cache/
-**/.mypy_cache/
-**/.venv
-frontend/.next
-frontend/node_modules
-backend/*.db
-.env

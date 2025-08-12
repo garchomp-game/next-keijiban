@@ -3,8 +3,7 @@
   "private": true,
   "workspaces": ["frontend"],
   "scripts": {
-    "dev": "./scripts/dev-docker.sh",
-    "dev:docker": "./scripts/dev-docker.sh",
+    "dev": "./scripts/dev-native.sh",
     "dev:native": "./scripts/dev-native.sh",
     "dev:stop": "./scripts/dev-stop.sh",
     "dev:api": "flask --app backend/app.py run --host 0.0.0.0 --port 5000",

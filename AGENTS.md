@@ -4,7 +4,7 @@
 - Backend: ./backend  (Flask + Flask-SocketIO, SQLAlchemy/Alembic)
 - Frontend: ./frontend (Next.js 14/15, app router 推奨)
 - Docs: ./docs
-- Infra: docker-compose (Postgres, Redis)
+- Infra: PostgreSQL 16 & Redis 7 (run locally)
 
 ## Runtime & Tools
 - Python: 3.11+
@@ -13,7 +13,7 @@
 - Package: pip（Poetry可だが標準はpip） / npm or pnpm（どちらかに統一）
 
 ## Local Setup (順序)
-1) `docker compose up -d`  # Postgres & Redis が立ち上がること
+1) PostgreSQL 16 と Redis 7 が localhost で稼働していること
 2) Backend env: `cp backend/.env.example backend/.env` に必要値を記入
 3) Frontend env: `cp frontend/.env.local.example frontend/.env.local`
 4) Backend deps（参考）: `python -m venv .venv && source .venv/bin/activate && pip install -r backend/requirements.txt`

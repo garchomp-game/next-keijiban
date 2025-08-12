@@ -36,15 +36,15 @@ if ! command -v psql &> /dev/null; then
     exit 1
 fi
 
-# PostgreSQLとRedisの起動チェック（Docker以外での実行を想定）
+# PostgreSQLとRedisが動作しているか確認
 if ! pg_isready -h localhost -p 5432 &> /dev/null; then
-    echo "⚠️  PostgreSQL is not running. Starting with Docker..."
-    docker run -d --name postgres-dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=keijiban postgres:16-alpine
+    echo "❌ PostgreSQL is not running on localhost:5432"
+    exit 1
 fi
 
 if ! redis-cli -h localhost -p 6379 ping &> /dev/null; then
-    echo "⚠️  Redis is not running. Starting with Docker..."
-    docker run -d --name redis-dev -p 6379:6379 redis:7-alpine
+    echo "❌ Redis is not running on localhost:6379"
+    exit 1
 fi
 
 # 依存関係のインストール
