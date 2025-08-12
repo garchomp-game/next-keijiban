@@ -5,7 +5,7 @@
     "e2e": "playwright test",
     "smoke": "artillery run ws-smoke.yml",
     "lint": "echo 'no lint'",
-    "typecheck": "echo 'no typecheck'"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.0",

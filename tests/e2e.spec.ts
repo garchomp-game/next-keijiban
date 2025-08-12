@@ -25,10 +25,13 @@ test('signup login room creation and realtime messaging', async ({ browser }) =>
   await page1.fill('[data-testid="login-email"]', user1.email);
   await page1.fill('[data-testid="login-password"]', user1.password);
   await page1.click('[data-testid="login-submit"]');
+  // Wait for login to complete; adjust the URL/selector to match your app
+  await page1.waitForURL(/\/rooms/);
 
   await page1.fill('[data-testid="create-room-input"]', 'test room');
   await page1.click('[data-testid="create-room-submit"]');
   const roomButton = page1.locator('[data-testid^="room-item-"]').last();
+  await roomButton.waitFor({ state: 'visible' });
   const roomIdAttr = await roomButton.getAttribute('data-testid');
   if (!roomIdAttr) throw new Error('room id not found');
   const roomId = roomIdAttr.replace('room-item-', '');
@@ -46,6 +49,8 @@ test('signup login room creation and realtime messaging', async ({ browser }) =>
   await page2.fill('[data-testid="login-email"]', user2.email);
   await page2.fill('[data-testid="login-password"]', user2.password);
   await page2.click('[data-testid="login-submit"]');
+  // Wait for login to complete; adjust the URL/selector to match your app
+  await page2.waitForURL(/\/rooms/);
   await page2.goto(`/rooms/${roomId}`);
 
   await page1.fill('[data-testid="message-input"]', 'hello from user1');
