@@ -4,7 +4,7 @@
 - Codex/CLI がこのリポジトリで小さく安全に価値を出せるよう、段階的なタスクを定義。
 
 ## 優先タスク（短冊化）
-1. **Sprint 0（土台）**: docker-compose（pg/redis）、env example、共通スクリプト、README 整備
+1. **Sprint 0（土台）**: PostgreSQL/Redis のローカル起動手順、env example、共通スクリプト、README 整備
 2. **DB 永続化**: SQLAlchemy モデル（User/Room/Message）、Alembic 初期マイグレーション、Seed
 3. **REST 最小実装**: OpenAPI に沿った /auth, /rooms, /rooms/{id}/messages
 4. **WS 最小実装**: /ws 名前空間、join/leave/message/typing、ACK/Broadcast

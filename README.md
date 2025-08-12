@@ -5,7 +5,7 @@
 Node 22 LTS を使用するため、`.nvmrc` を用意しています。
 
 ## Quick Start
-1. **Infra**: `docker compose up -d`  # Postgres/Redis 起動
+1. **Infra**: PostgreSQL 16 と Redis 7 を localhost で起動（ports 5432/6379）
 2. **Env files**
    - Backend: `cp backend/.env.example backend/.env`
    - Frontend: `cp frontend/.env.local.example frontend/.env.local`
@@ -18,7 +18,6 @@ Node 22 LTS を使用するため、`.nvmrc` を用意しています。
 
 `CORS_ORIGIN` と `NEXT_PUBLIC_API_BASE_URL` でポート/オリジンを調整できます。
 
-> Docker が利用できない場合は PostgreSQL 16 と Redis 7 を個別に起動してください。compose の healthcheck を参考にできます。
 
 ### Troubleshooting
 - psycopg のビルドに失敗する場合は `psycopg[binary]` を利用するか、ビルドツールを確認してください。
