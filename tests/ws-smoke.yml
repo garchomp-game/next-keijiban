@@ -1,0 +1,24 @@
+config:
+  target: "http://localhost:5000"
+  phases:
+    - duration: 1
+      arrivalCount: 1
+  processor: "./ws-smoke.js"
+  socketio:
+    path: "/ws"
+    transports: ["websocket"]
+    auth:
+      token: "{{ token }}"
+scenarios:
+  - name: "room join and message"
+    flow:
+      - emit:
+          channel: "room:join"
+          data:
+            roomId: "{{ roomId }}"
+      - think: 1
+      - emit:
+          channel: "message:create"
+          data:
+            roomId: "{{ roomId }}"
+            body: "hello from artillery"
