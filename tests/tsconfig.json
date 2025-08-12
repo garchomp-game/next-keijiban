@@ -5,7 +5,7 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "strict": true,
-    "types": ["node", "playwright"],
+    "types": ["node"],
     "outDir": "dist"
   },
   "include": ["**/*.ts"],
